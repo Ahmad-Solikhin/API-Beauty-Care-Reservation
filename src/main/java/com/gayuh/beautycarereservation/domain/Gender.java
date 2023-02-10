@@ -12,6 +12,6 @@ public class Gender implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender", nullable = false, unique = true)
     private String gender;
 }

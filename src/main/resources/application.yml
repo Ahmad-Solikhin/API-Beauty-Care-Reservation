@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    hikari:
+      connection-timeout: 600000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+    url: jdbc:postgresql://localhost/beauty_care_reservation
+    username: postgres
+    password: root
+    #Best practice kalo udah ga local
+    #username: ${username.database}
+    #password: ${password.database}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        #        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 100
+    show-sql: true
+server:
+  port: 9000

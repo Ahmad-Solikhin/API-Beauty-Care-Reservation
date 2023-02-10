@@ -3,6 +3,7 @@ package com.gayuh.beautycarereservation.service.impl;
 import com.gayuh.beautycarereservation.domain.Gender;
 import com.gayuh.beautycarereservation.dto.gender.GenderAddRequest;
 import com.gayuh.beautycarereservation.dto.gender.GenderResponse;
+import com.gayuh.beautycarereservation.dto.gender.GenderUpdateRequest;
 import com.gayuh.beautycarereservation.exception.NotFoundException;
 import com.gayuh.beautycarereservation.repository.GenderRepository;
 import com.gayuh.beautycarereservation.service.GenderService;
@@ -19,9 +20,11 @@ public class GenderServiceImpl implements GenderService {
     public GenderResponse findById(Long id) {
         Gender gender = genderRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Gender with id: " + id + " not found"));
-        GenderResponse response = new GenderResponse();
-        response.setGender(gender.getGender());
-        response.setId(gender.getId());
+        GenderResponse response = GenderResponse
+                .builder()
+                .id(gender.getId())
+                .gender(gender.getGender())
+                .build();
 
         return response;
     }
@@ -31,5 +34,20 @@ public class GenderServiceImpl implements GenderService {
         Gender gender = new Gender();
         gender.setGender(request.getGenderName());
         genderRepository.save(gender);
+    }
+
+    @Override
+    public void updateGender(Long id, GenderUpdateRequest request) {
+        Gender gender = genderRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Gender with id: " + id + " not found"));
+        gender.setGender(request.getGenderName());
+        genderRepository.save(gender);
+    }
+
+    @Override
+    public void deleteGender(Long id) {
+        Gender gender = genderRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Gender with id: " + id + " not found"));
+        genderRepository.delete(gender);
     }
 }

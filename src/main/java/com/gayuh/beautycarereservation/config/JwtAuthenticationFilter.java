@@ -47,6 +47,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwt = authHeader.substring(keyBearer.length());
         userEmail = jwtService.extractUserEmail(jwt); // extract user email nya dari jwt token yang di dapat
 
+        //Sebagai catatan juga, ini kalo diubah tokennya maka harusnya userEmail nya gabakal ada karena signaturenya berubah juga
+
         //Ini handler apakah user udah authenticated atau belum, kalo belum ini jalan
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);

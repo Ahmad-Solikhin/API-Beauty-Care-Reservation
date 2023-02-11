@@ -1,5 +1,6 @@
 package com.gayuh.beautycarereservation.controller;
 
+import com.gayuh.beautycarereservation.domain.Gender;
 import com.gayuh.beautycarereservation.dto.gender.GenderAddRequest;
 import com.gayuh.beautycarereservation.dto.gender.GenderResponse;
 import com.gayuh.beautycarereservation.dto.gender.GenderUpdateRequest;
@@ -21,7 +22,12 @@ public class GenderController {
     private final GenderService genderService;
     @GetMapping("/v1/gender/{genderId}")
     public ResponseEntity<GenderResponse> finGenderById(@PathVariable(name = "genderId") Long genderId){
-        GenderResponse response = genderService.findById(genderId);
+        Gender gender = genderService.findById(genderId);
+        GenderResponse response = GenderResponse
+                .builder()
+                .id(gender.getId())
+                .gender(gender.getGender())
+                .build();
         return ResponseEntity.ok().body(response);
     }
 

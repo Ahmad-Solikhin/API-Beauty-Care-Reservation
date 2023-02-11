@@ -5,6 +5,7 @@ import com.gayuh.beautycarereservation.dto.gender.GenderAddRequest;
 import com.gayuh.beautycarereservation.dto.gender.GenderResponse;
 import com.gayuh.beautycarereservation.dto.gender.GenderUpdateRequest;
 import com.gayuh.beautycarereservation.service.GenderService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.net.URI;
 @AllArgsConstructor
 @Validated
 @RestController
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api")
 public class GenderController {
 

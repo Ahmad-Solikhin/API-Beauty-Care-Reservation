@@ -11,7 +11,8 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "user_account", indexes ={
-        @Index(name = "uk_username", columnList = "username")
+        @Index(name = "uk_username", columnList = "username"),
+        @Index(name = "uk_email", columnList = "email")
 })
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserAccount extends AbstractDefaultEntity{
@@ -23,6 +24,8 @@ public class UserAccount extends AbstractDefaultEntity{
     private String username;
     @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
     @Column(name = "age", nullable = false)
     private Integer age;
     @Column(name = "birth_date", nullable = false)
